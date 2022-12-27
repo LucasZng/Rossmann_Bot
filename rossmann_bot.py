@@ -93,11 +93,10 @@ def index():
         chat_id, store_id = parse_message(message)
 
         if store_id != 'error':
+            # loading data
+            data = load_dataset(store_id)
             
             if data != 'error':
-                # loading data
-                data = load_dataset(store_id)
-
                 # predict
                 d1 = predict(data)
 
