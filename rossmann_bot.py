@@ -1,6 +1,7 @@
 import requests
 import json
 import pandas as pd
+import os
 
 from flask import Flask, request, Response
 
@@ -12,6 +13,9 @@ from flask import Flask, request, Response
 #
 ## get updates
 #https://api.telegram.org/bot5693715114:AAE_pvZJ5ZJYqeZAfvqvPgNc4TpHjjshCaM/getUpdates
+#
+## Webhook
+#https://api.telegram.org/bot5693715114:AAE_pvZJ5ZJYqeZAfvqvPgNc4TpHjjshCaM/getWebhook:url=
 #
 ## send message
 #https://api.telegram.org/bot5693715114:AAE_pvZJ5ZJYqeZAfvqvPgNc4TpHjjshCaM/sendMessage?chat_id=1633133118&text=Hi Zangs
@@ -28,8 +32,8 @@ def send_message(chat_id, text):
 def load_dataset(store_id):
 
     # loading test dataset
-    df10 = pd.read_csv('C:/Users/Zanga/Documents/repos/ds_em_produçao/store_sales_prediction/datasets/test.csv')
-    df_store_raw = pd.read_csv('C:/Users/Zanga/Documents/repos/ds_em_produçao/store_sales_prediction/datasets/store.csv')
+    df10 = pd.read_csv('datasets/test.csv')
+    df_store_raw = pd.read_csv('datasets/store.csv')
 
     # merge test dataset + store
     df_test = pd.merge(df10, df_store_raw, how='left', on='Store')
@@ -116,4 +120,5 @@ def index():
         return '<h1> Rossmann Telegram BOT </h1>'
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port = 5000)
+    port = os.environ.get('PORT', 5000)
+    app.run(host='0.0.0.0', port = port)
