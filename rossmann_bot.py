@@ -1,6 +1,7 @@
 import json
 import pandas as pd
 import os
+import requests
 
 from flask import Flask, request, Response
 
@@ -23,7 +24,7 @@ def send_message(chat_id, text):
     # send message
     url = 'https://api.telegram.org/bot{}/'.format(TOKEN)
     url = url + 'sendMessage?chat_id={}'.format(chat_id)
-    r = request.post(url, json={'text': text})
+    r = requests.post(url, json={'text': text})
     print('Status Code: {}'.format(r.status_code))
 
     return None 
@@ -59,7 +60,7 @@ def predict(data):
     url = 'https://rossmann-sales-predict-j3ri.onrender.com/rossmann/predict'
     header = {'Content-type': 'application/json' }
     data = data
-    r = request.post(url, data = data, headers = header)
+    r = requests.post(url, data = data, headers = header)
     print('Status Code {}'.format(r.status_code))
 
     d1 = pd.DataFrame(r.json(), columns = r.json()[0].keys())
