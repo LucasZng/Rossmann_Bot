@@ -14,14 +14,14 @@ TOKEN = '5693715114:AAE_pvZJ5ZJYqeZAfvqvPgNc4TpHjjshCaM'
 #https://api.telegram.org/bot5693715114:AAE_pvZJ5ZJYqeZAfvqvPgNc4TpHjjshCaM/getUpdates
 #
 ## Webhook
-#https://api.telegram.org/bot5693715114:AAE_pvZJ5ZJYqeZAfvqvPgNc4TpHjjshCaM/getWebhook:url=
+#https://api.telegram.org/bot5693715114:AAE_pvZJ5ZJYqeZAfvqvPgNc4TpHjjshCaM/setWebhook?url=https://rossmann-bot-e3t3.onrender.com
 #
 ## send message
 #https://api.telegram.org/bot5693715114:AAE_pvZJ5ZJYqeZAfvqvPgNc4TpHjjshCaM/sendMessage?chat_id=1633133118&text=Hi Zangs
 
 def send_message(chat_id, text):
     # send message
-    url = 'https://api.telegram.org/bot{}'.format(TOKEN)
+    url = 'https://api.telegram.org/bot{}/'.format(TOKEN)
     url = url + 'sendMessage?chat_id={}'.format(chat_id)
     r = request.post(url, json={'text': text})
     print('Status Code: {}'.format(r.status_code))
